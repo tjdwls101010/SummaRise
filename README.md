@@ -90,3 +90,13 @@ easynext sentry
 # Google Adsense
 easynext adsense
 ```
+
+## Microsoft Clarity 사용법
+
+이 프로젝트는 Microsoft Clarity가 설정되어 있습니다. 프로젝트 ID: `summarize`
+
+Microsoft Clarity는 사용자 행동 분석 도구로, 별도의 코드 없이 자동으로 사용자 세션을 기록하고 히트맵, 세션 재생 등의 기능을 제공합니다.
+
+Clarity 컴포넌트는 `src/third-parties/Clarity.tsx`에 위치하며, `layout.tsx`에 자동으로 추가되었습니다.
+
+자세한 내용은 [Microsoft Clarity 공식 문서](https://docs.microsoft.com/en-us/clarity/setup-and-installation/clarity-setup)를 참조하세요.

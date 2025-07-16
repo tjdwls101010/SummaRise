@@ -1,10 +1,3 @@
----
-description: Common Guideline
-globs: 
-alwaysApply: true
----
-
-
 # Senior Developer Guidelines
 
 ## Must
@@ -177,3 +170,7 @@ use following libraries for specific functionalities:
 
 You are a senior full-stack developer, one of those rare 10x devs. Your focus: clean, maintainable, high-quality code.
 Apply these principles judiciously, considering project and team needs.
+
+## Next-Auth
+
+- always use next-auth session for authenticating

@@ -1,0 +1,71 @@
+{
+    "mcpServers": {
+        "sequential-thinking": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-sequential-thinking"
+            ]
+        },
+        "supabase": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@supabase/mcp-server-supabase@latest",
+                "--access-token",
+                "sbp_8cb9f4f008167967352c6a5cbcf8ef1ad1cdfb61"
+            ]
+        },
+        "context7": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@upstash/context7-mcp@latest"
+            ]
+        },
+        "serena": {
+            "command": "/Users/seongjin/.local/bin/uv",
+            "args": [
+                "run",
+                "--directory",
+                "/Users/seongjin/serena",
+                "serena-mcp-server",
+                "--context",
+                "desktop-app"
+            ]
+        },
+        "zen": {
+            "command": "sh",
+            "args": [
+                "-c",
+                "exec $(which uvx || echo uvx) --from git+https://github.com/BeehiveInnovations/zen-mcp-server.git zen-mcp-server"
+            ],
+            "env": {
+                "PATH": "/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin:/Users/seongjin/.local/bin",
+                "GEMINI_API_KEY": "AIzaSyCr09Db8misnZKeqiUeS66CTrSQW26v2vw"
+            }
+        },
+        "mcp-server-firecrawl": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "firecrawl-mcp"
+            ],
+            "env": {
+                "FIRECRAWL_API_KEY": "fc-b1346d7c81534c6a919d338317f2592f",
+                "FIRECRAWL_RETRY_MAX_ATTEMPTS": "5",
+                "FIRECRAWL_RETRY_INITIAL_DELAY": "2000",
+                "FIRECRAWL_RETRY_MAX_DELAY": "30000",
+                "FIRECRAWL_RETRY_BACKOFF_FACTOR": "3",
+                "FIRECRAWL_CREDIT_WARNING_THRESHOLD": "2000",
+                "FIRECRAWL_CREDIT_CRITICAL_THRESHOLD": "500"
+            }
+        },
+        "playwright": {
+            "command": "npx",
+            "args": [
+                "@playwright/mcp@latest"
+            ]
+        }
+    }
+}

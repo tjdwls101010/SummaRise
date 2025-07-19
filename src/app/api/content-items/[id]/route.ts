@@ -19,7 +19,6 @@ export async function GET(
         summary,
         original_url,
         content_type,
-        channel_or_site,
         created_at,
         updated_at,
         metadata

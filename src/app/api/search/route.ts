@@ -20,7 +20,6 @@ export async function GET(request: NextRequest) {
         summary,
         original_url,
         content_type,
-        channel_or_site,
         created_at,
         updated_at,
         metadata
@@ -35,8 +34,7 @@ export async function GET(request: NextRequest) {
       // Use Supabase full-text search
       supabaseQuery = supabaseQuery.or(`
         title.ilike.%${searchQuery}%,
-        summary.ilike.%${searchQuery}%,
-        channel_or_site.ilike.%${searchQuery}%
+        summary.ilike.%${searchQuery}%
       `);
     }
 

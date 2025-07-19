@@ -20,7 +20,6 @@ export async function GET(request: NextRequest) {
         summary,
         original_url,
         content_type,
-        channel_or_site,
         created_at,
         updated_at,
         metadata

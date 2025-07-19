@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createServerSupabaseClient } from '@/lib/supabase/server';
+import { createPureClient } from '@/lib/supabase/server';
 
 export const runtime = 'edge';
 
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     const offset = parseInt(searchParams.get('offset') || '0');
     const contentType = searchParams.get('content_type'); // 'youtube' | 'article'
 
-    const supabase = createServerSupabaseClient();
+    const supabase = await createPureClient();
 
     let query = supabase
       .from('content_items')
@@ -45,12 +45,12 @@ export async function GET(request: NextRequest) {
 
     // Transform data to match frontend interface
     const transformedItems = items?.map(item => ({
-      id: item.id,
+      id: item.id.toString(),
       title: item.title || 'Untitled',
       summary: item.summary || 'No summary available',
       original_url: item.original_url,
       content_type: item.content_type,
-      channel_or_site: item.channel_or_site || 'Unknown',
+      channel_or_site: item.metadata?.channel_or_site || 'Unknown',
       created_at: item.created_at,
       tags: item.metadata?.tags || [],
       thumbnail: item.content_type === 'youtube' 

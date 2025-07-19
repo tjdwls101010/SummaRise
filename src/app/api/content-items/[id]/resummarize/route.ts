@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createServerSupabaseClient } from '@/lib/supabase/server';
+import { createPureClient } from '@/lib/supabase/server';
 
 export const runtime = 'edge';
 
@@ -9,7 +9,7 @@ export async function POST(
 ) {
   try {
     const { id } = await params;
-    const supabase = createServerSupabaseClient();
+    const supabase = await createPureClient();
 
     // First, get the original content
     const { data: item, error: fetchError } = await supabase

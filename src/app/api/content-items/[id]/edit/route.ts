@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createServerSupabaseClient } from '@/lib/supabase/server';
+import { createPureClient } from '@/lib/supabase/server';
 
 export const runtime = 'edge';
 
@@ -18,7 +18,7 @@ export async function POST(
       );
     }
 
-    const supabase = createServerSupabaseClient();
+    const supabase = await createPureClient();
 
     // First, get the current content for versioning
     const { data: currentItem, error: fetchError } = await supabase

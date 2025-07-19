@@ -100,8 +100,8 @@ function AppSidebar() {
           <Image
             src="/app-logo.png"
             alt="SummaRise"
-            width={32}
-            height={32}
+            width={222}
+            height={11}
             className="rounded-md"
           />
         </div>

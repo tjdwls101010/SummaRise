@@ -51,6 +51,7 @@ interface DashboardProps {
 
 function SummaRiseDashboard({ className = "" }: DashboardProps) {
   const { toast } = useToast();
+  const router = useRouter();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [urlInput, setUrlInput] = useState('');
@@ -371,7 +372,11 @@ function SummaRiseDashboard({ className = "" }: DashboardProps) {
                 {viewMode === 'grid' ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {currentContent.map((item) => (
-                      <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
+                      <Card 
+                        key={item.id} 
+                        className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                        onClick={() => router.push(`/content/${item.id}`)}
+                      >
                         {item.thumbnail && (
                           <div className="aspect-video overflow-hidden">
                             <img 
@@ -431,7 +436,11 @@ function SummaRiseDashboard({ className = "" }: DashboardProps) {
                 ) : (
                   <div className="space-y-4">
                     {currentContent.map((item) => (
-                      <Card key={item.id} className="p-4 hover:shadow-sm transition-shadow cursor-pointer">
+                      <Card 
+                        key={item.id} 
+                        className="p-4 hover:shadow-sm transition-shadow cursor-pointer"
+                        onClick={() => router.push(`/content/${item.id}`)}
+                      >
                         <div className="flex items-start gap-4">
                           {item.thumbnail && (
                             <div className="w-24 h-16 rounded overflow-hidden flex-shrink-0">

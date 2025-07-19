@@ -1,0 +1,87 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { createServerSupabaseClient } from '@/lib/supabase/server';
+
+export const runtime = 'edge';
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params;
+    const supabase = createServerSupabaseClient();
+
+    const { data: item, error } = await supabase
+      .from('content_items')
+      .select(`
+        id,
+        title,
+        summary,
+        original_url,
+        content_type,
+        channel_or_site,
+        created_at,
+        updated_at,
+        metadata
+      `)
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      if (error.code === 'PGRST116') {
+        return NextResponse.json(
+          { error: 'Content not found' },
+          { status: 404 }
+        );
+      }
+      console.error('Supabase query error:', error);
+      return NextResponse.json(
+        { error: 'Failed to fetch content item' },
+        { status: 500 }
+      );
+    }
+
+    // Transform data to match frontend interface
+    const transformedItem = {
+      id: item.id,
+      title: item.title || 'Untitled',
+      summary: item.summary || 'No summary available',
+      original_url: item.original_url,
+      content_type: item.content_type,
+      channel_or_site: item.channel_or_site || 'Unknown',
+      created_at: item.created_at,
+      updated_at: item.updated_at,
+      tags: item.metadata?.tags || [],
+      thumbnail: item.content_type === 'youtube' 
+        ? `https://img.youtube.com/vi/${extractYouTubeVideoId(item.original_url)}/mqdefault.jpg`
+        : `https://picsum.photos/400/200?random=${item.id}`
+    };
+
+    return NextResponse.json(transformedItem);
+
+  } catch (error) {
+    console.error('Content item detail API error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
+
+function extractYouTubeVideoId(url: string): string | null {
+  if (!url) return null;
+  
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/)([^&\n?#]+)/,
+    /youtube\.com\/watch\?.*v=([^&\n?#]+)/
+  ];
+  
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match) {
+      return match[1];
+    }
+  }
+  
+  return null;
+}

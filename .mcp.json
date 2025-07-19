@@ -1,0 +1,51 @@
+{
+    "mcpServers": {
+        "sequential-thinking": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-sequential-thinking"
+            ]
+        },
+        "supabase": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@supabase/mcp-server-supabase@latest",
+                "--access-token",
+                "sbp_8cb9f4f008167967352c6a5cbcf8ef1ad1cdfb61"
+            ]
+        },
+        "context7": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@upstash/context7-mcp@latest"
+            ]
+        },
+        "playwright": {
+            "command": "npx",
+            "args": [
+                "@playwright/mcp@latest"
+            ]
+        },
+        "vooster": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "--package=@vooster/mcp@latest",
+                "vooster-ai",
+                "--api-key=ak_jonnbw0lmriu6t0zn2fglyxh"
+            ],
+            "env": {}
+        },
+        "21st": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@21st-dev/magic@latest",
+                "API_KEY=\"ab410097496e2c4d1d1916c430a7e18750d5986845c7f25ebdfd2eb8bbd82539\""
+            ]
+        }
+    }
+}
